@@ -35,13 +35,21 @@ class ListTableViewCell: UITableViewCell {
         didSet {
             nameTextLabel.text = toDoItem.name
             courseTextLabel.text = toDoItem.course
+            
             if toDoItem.dueDateSet == false {
                 dueDateLabel.text = ""
             } else {
                 dueDateLabel.text = "Due: \(dateFormatter.string(from: toDoItem.dueDate))"
 //                 "\(dateFormatter.string(from: toDoItems[indexPath.row].dueDate))"
             }
+            
             checkBoxButton.isSelected = toDoItem.completed
+           
+            if toDoItem.completed {
+                nameTextLabel.textColor = .gray
+            } else {
+                nameTextLabel.textColor = .black
+            }
         }
     }
     

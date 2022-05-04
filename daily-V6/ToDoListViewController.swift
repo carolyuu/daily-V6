@@ -189,6 +189,7 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource, Li
             
             toDoItems[selectedIndexPath.row].completed = !toDoItems[selectedIndexPath.row].completed
             
+            
             toDoListTableView.reloadRows(at: [selectedIndexPath], with: .automatic)
             saveData()
         }
@@ -203,20 +204,6 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource, Li
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
         cell.delegate = self
         cell.toDoItem = toDoItems[indexPath.row]
-//        cell.nameTextLabel?.text = toDoItems[indexPath.row].name
-//        cell.courseTextLabel?.text = toDoItems[indexPath.row].course
-        
-//        if toDoItem.dueDateSwitch.isOn == false {
-//
-//            
-//            cell.dueDateLabel.text = ""
-//        }
-
-//        cell.dueDateLabel.text = "\(dateFormatter.string(from: toDoItems[indexPath.row].dueDate))"
-//        cell.checkBoxButton.isSelected = toDoItems[indexPath.row].completed
-    
-//        cell.textLabel?.text = toDoItems[indexPath.row].name
-//        cell.detailTextLabel?.text = toDoItems[indexPath.row].course
         return cell
     }
     
