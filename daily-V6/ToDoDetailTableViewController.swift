@@ -10,7 +10,7 @@ import UIKit
 private let dateFormatter: DateFormatter = {
     print("📅 I JUST CREATED A DATE FORMATTER!")
     let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .short
+    dateFormatter.dateStyle = .medium
     dateFormatter.timeStyle = .short
     return dateFormatter
 }()
@@ -22,9 +22,8 @@ class ToDoDetailTableViewController: UITableViewController {
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var courseField: UITextField!
-    
+
     @IBOutlet weak var noteView: UITextView!
-    
     @IBOutlet weak var dueDateSwitch: UISwitch!
     @IBOutlet weak var dueDatePicker: UIDatePicker!
     @IBOutlet weak var dueDateDateLabel: UILabel!
@@ -41,7 +40,8 @@ class ToDoDetailTableViewController: UITableViewController {
         
         
         if toDoItem == nil {
-            toDoItem = ToDoItem(name: "", course: "", dueDate: Date().addingTimeInterval(24*60*60), notes: "", dueDateSet: false, reminderSet: false, reminderDate: Date().addingTimeInterval(24*60*60), completed: false)
+            toDoItem = ToDoItem(name: "", course: "", dueDate: Date(), notes: "", dueDateSet: true, reminderSet: false, reminderDate: Date(), completed: false)
+//            Date().addingTimeInterval(24*60*60)
         }
        updateUserInterface()
     }
@@ -52,7 +52,7 @@ class ToDoDetailTableViewController: UITableViewController {
         dueDatePicker.date = toDoItem.dueDate
         noteView.text = toDoItem.notes
         dueDateSwitch.isOn = toDoItem.dueDateSet
-        reminderSwitch.isOn = toDoItem.reminderSet//updates UI
+        reminderSwitch.isOn = toDoItem.reminderSet
         dueDateDateLabel.textColor = (dueDateSwitch.isOn ? .black :.gray)
         reminderDateLabel.textColor = (reminderSwitch.isOn ? .black :.gray)
         dueDateDateLabel.text = dateFormatter.string(from: toDoItem.dueDate)
@@ -80,6 +80,14 @@ class ToDoDetailTableViewController: UITableViewController {
     @IBAction func dueDateSwitchChanged(_ sender: UISwitch) {
         
         dueDateDateLabel.textColor = (dueDateSwitch.isOn ? .black :.gray)
+        
+        
+        dueDateDateLabel.text = (dueDateSwitch.isOn ? dateFormatter.string(from: dueDatePicker.date) : "")
+        
+        if dueDateDateLabel.textColor == .gray {
+            dueDateDateLabel.text = ""
+        }
+        
         tableView.beginUpdates()
         tableView.endUpdates()
     }
@@ -87,6 +95,8 @@ class ToDoDetailTableViewController: UITableViewController {
     @IBAction func reminderSwitchChanged(_ sender: Any) {
         
         reminderDateLabel.textColor = (reminderSwitch.isOn ? .black :.gray)
+    
+        
         tableView.beginUpdates()
         tableView.endUpdates()
         
@@ -96,7 +106,10 @@ class ToDoDetailTableViewController: UITableViewController {
         reminderDateLabel.text = dateFormatter.string(from: sender.date)
     }
     @IBAction func dueDateDatePickerChanged(_ sender: UIDatePicker) {
+//        if dueDateSwitch.isOn {
         dueDateDateLabel.text = dateFormatter.string(from: sender.date)
+        
+//        }
     
     }
     

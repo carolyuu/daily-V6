@@ -8,24 +8,24 @@
 import UIKit
 import UserNotifications
 
-private let dateFormatter: DateFormatter = {
-    print("📅 I JUST CREATED A DATE FORMATTER!")
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .short
-    dateFormatter.timeStyle = .short
-    return dateFormatter
-}()
+//private let dateFormatter: DateFormatter = {
+//    print("📅 I JUST CREATED A DATE FORMATTER!")
+//    let dateFormatter = DateFormatter()
+//    dateFormatter.dateStyle = .short
+//    dateFormatter.timeStyle = .short
+//    return dateFormatter
+//}()
 
 
 class ToDoListViewController: UIViewController {
     
     @IBOutlet weak var toDoListTableView: UITableView!
-    
     @IBOutlet weak var addBarButton: UIBarButtonItem!
         
     var toDoItems: [ToDoItem] = []
     
 //    var toDoArray = ["First item", "Second Item"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,7 @@ class ToDoListViewController: UIViewController {
         loadData()
         autherizeLocalNotifications()
     }
+    
     
     func autherizeLocalNotifications() {
 //        (viewController: UIViewController)
@@ -54,6 +55,7 @@ class ToDoListViewController: UIViewController {
         }
     }
     
+    
     func setNotifications() {
         guard toDoItems.count > 0 else {
             return
@@ -69,6 +71,7 @@ class ToDoListViewController: UIViewController {
             }
         }
     }
+    
     
     func setCalendarNotification(title: String, subtitle: String, body: String, badgeNumber: NSNumber?, sound: UNNotificationSound?, date: Date) -> String {
        // create content:
@@ -199,11 +202,19 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource, Li
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
         cell.delegate = self
-        cell.nameTextLabel?.text = toDoItems[indexPath.row].name
-        cell.courseTextLabel?.text = toDoItems[indexPath.row].course
+        cell.toDoItem = toDoItems[indexPath.row]
+//        cell.nameTextLabel?.text = toDoItems[indexPath.row].name
+//        cell.courseTextLabel?.text = toDoItems[indexPath.row].course
         
-        cell.dueDateLabel.text = "\(dateFormatter.string(from: toDoItems[indexPath.row].dueDate))"
-        cell.checkBoxButton.isSelected = toDoItems[indexPath.row].completed
+//        if toDoItem.dueDateSwitch.isOn == false {
+//
+//            
+//            cell.dueDateLabel.text = ""
+//        }
+
+//        cell.dueDateLabel.text = "\(dateFormatter.string(from: toDoItems[indexPath.row].dueDate))"
+//        cell.checkBoxButton.isSelected = toDoItems[indexPath.row].completed
+    
 //        cell.textLabel?.text = toDoItems[indexPath.row].name
 //        cell.detailTextLabel?.text = toDoItems[indexPath.row].course
         return cell

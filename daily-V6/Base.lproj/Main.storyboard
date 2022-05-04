@@ -29,19 +29,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwM-PZ-hbU">
-                                                    <rect key="frame" x="70" y="8" width="41.5" height="20.5"/>
+                                                    <rect key="frame" x="70" y="8" width="41.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Riu-w0-RBs">
-                                                    <rect key="frame" x="70" y="33" width="33" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due: " textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEP-K4-iqF">
-                                                    <rect key="frame" x="349.5" y="0.0" width="36" height="57"/>
+                                                    <rect key="frame" x="70" y="31" width="36" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -56,18 +50,24 @@
                                                         <action selector="checkToggled:" destination="gHx-na-bAQ" eventType="touchUpInside" id="5gT-HE-fmN"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Riu-w0-RBs">
+                                                    <rect key="frame" x="352.5" y="18" width="33" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" name="BackgroundColor"/>
                                             <constraints>
-                                                <constraint firstItem="BwM-PZ-hbU" firstAttribute="top" secondItem="htk-co-fxf" secondAttribute="top" constant="8" id="0GK-uN-Hjo"/>
-                                                <constraint firstAttribute="bottom" secondItem="AEP-K4-iqF" secondAttribute="bottom" id="R12-vU-KJw"/>
+                                                <constraint firstItem="Riu-w0-RBs" firstAttribute="top" secondItem="htk-co-fxf" secondAttribute="top" constant="18" id="5PN-02-41e"/>
+                                                <constraint firstItem="BwM-PZ-hbU" firstAttribute="top" secondItem="htk-co-fxf" secondAttribute="top" constant="8" id="65N-EA-TlP"/>
+                                                <constraint firstAttribute="bottom" secondItem="Riu-w0-RBs" secondAttribute="bottom" constant="18" id="Ip1-lp-O0i"/>
+                                                <constraint firstItem="BwM-PZ-hbU" firstAttribute="leading" secondItem="htk-co-fxf" secondAttribute="leading" constant="70" id="JUX-O0-Rms"/>
+                                                <constraint firstItem="AEP-K4-iqF" firstAttribute="leading" secondItem="htk-co-fxf" secondAttribute="leading" constant="70" id="ViJ-Ar-YbN"/>
                                                 <constraint firstItem="etZ-11-A3l" firstAttribute="leading" secondItem="htk-co-fxf" secondAttribute="leading" constant="25" id="ccn-hj-4kV"/>
-                                                <constraint firstItem="Riu-w0-RBs" firstAttribute="leading" secondItem="htk-co-fxf" secondAttribute="leading" constant="70" id="iNf-WN-cKo"/>
-                                                <constraint firstItem="BwM-PZ-hbU" firstAttribute="leading" secondItem="htk-co-fxf" secondAttribute="leading" constant="70" id="m34-nK-f19"/>
                                                 <constraint firstItem="etZ-11-A3l" firstAttribute="centerY" secondItem="htk-co-fxf" secondAttribute="centerY" id="oVJ-aW-XxU"/>
-                                                <constraint firstAttribute="bottom" secondItem="Riu-w0-RBs" secondAttribute="bottom" constant="8" id="oua-JE-ddn"/>
-                                                <constraint firstAttribute="trailing" secondItem="AEP-K4-iqF" secondAttribute="trailing" id="rMD-ci-Oa7"/>
-                                                <constraint firstItem="AEP-K4-iqF" firstAttribute="top" secondItem="htk-co-fxf" secondAttribute="top" id="smL-N9-26z"/>
+                                                <constraint firstAttribute="trailing" secondItem="Riu-w0-RBs" secondAttribute="trailing" id="phP-az-iSP"/>
+                                                <constraint firstAttribute="bottom" secondItem="AEP-K4-iqF" secondAttribute="bottom" constant="8" id="yEa-ft-bhW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="BackgroundColor"/>
