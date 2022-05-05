@@ -19,6 +19,8 @@
 		F12754772820626E00FFB261 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12754762820626E00FFB261 /* ListTableViewCell.swift */; };
 		F1CA368F282341AC0081FAB4 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA368E282341AC0081FAB4 /* LocalNotificationManager.swift */; };
 		F1CA3691282346320081FAB4 /* UIViewController+alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA3690282346320081FAB4 /* UIViewController+alert.swift */; };
+		F1CA36932823544C0081FAB4 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA36922823544C0081FAB4 /* NotesViewController.swift */; };
+		F1CA3697282365430081FAB4 /* NotesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA3696282365430081FAB4 /* NotesDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		F12754762820626E00FFB261 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		F1CA368E282341AC0081FAB4 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		F1CA3690282346320081FAB4 /* UIViewController+alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+alert.swift"; sourceTree = "<group>"; };
+		F1CA36922823544C0081FAB4 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		F1CA3696282365430081FAB4 /* NotesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 				F127545E2820215400FFB261 /* ToDoListViewController.swift */,
 				F127547228202C4000FFB261 /* ToDoDetailTableViewController.swift */,
 				F12754762820626E00FFB261 /* ListTableViewCell.swift */,
+				F1CA36922823544C0081FAB4 /* NotesViewController.swift */,
+				F1CA3696282365430081FAB4 /* NotesDetailViewController.swift */,
 				F12754602820215400FFB261 /* Main.storyboard */,
 				F12754632820215600FFB261 /* Assets.xcassets */,
 				F12754652820215600FFB261 /* LaunchScreen.storyboard */,
@@ -162,7 +168,9 @@
 				F1CA3691282346320081FAB4 /* UIViewController+alert.swift in Sources */,
 				F12754772820626E00FFB261 /* ListTableViewCell.swift in Sources */,
 				F127545B2820215400FFB261 /* AppDelegate.swift in Sources */,
+				F1CA36932823544C0081FAB4 /* NotesViewController.swift in Sources */,
 				F12754712820282B00FFB261 /* ToDoItem.swift in Sources */,
+				F1CA3697282365430081FAB4 /* NotesDetailViewController.swift in Sources */,
 				F1CA368F282341AC0081FAB4 /* LocalNotificationManager.swift in Sources */,
 				F127545D2820215400FFB261 /* SceneDelegate.swift in Sources */,
 			);
