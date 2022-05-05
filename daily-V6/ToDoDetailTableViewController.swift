@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 private let dateFormatter: DateFormatter = {
     print("📅 I JUST CREATED A DATE FORMATTER!")
@@ -22,7 +23,7 @@ class ToDoDetailTableViewController: UITableViewController {
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var courseField: UITextField!
-
+    
     @IBOutlet weak var noteView: UITextView!
     @IBOutlet weak var dueDateSwitch: UISwitch!
     @IBOutlet weak var dueDatePicker: UIDatePicker!
@@ -38,12 +39,29 @@ class ToDoDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // setup foreground notification
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        // hide keyboard when tapped outside of a field
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+        
+        nameField.delegate = self
+        
+        //        courseField.delegate = self
         
         if toDoItem == nil {
-            toDoItem = ToDoItem(name: "", course: "", dueDate: Date(), notes: "", dueDateSet: true, reminderSet: false, reminderDate: Date(), completed: false)
-//            Date().addingTimeInterval(24*60*60)
+            toDoItem = ToDoItem(name: "", course: "", dueDate: Date().addingTimeInterval(24*60*60), notes: "", dueDateSet: true, reminderSet: false, reminderDate: Date(), completed: false)
+            nameField.becomeFirstResponder()
         }
-       updateUserInterface()
+        updateUserInterface()
+    }
+    
+    @objc func appActiveNotification() {
+        print ("😯 The app just came to the foreground - cool!")
+        updateReminderSwitch()
     }
     
     func updateUserInterface() {
@@ -57,28 +75,55 @@ class ToDoDetailTableViewController: UITableViewController {
         reminderDateLabel.textColor = (reminderSwitch.isOn ? .black :.gray)
         dueDateDateLabel.text = dateFormatter.string(from: toDoItem.dueDate)
         reminderDateLabel.text = dateFormatter.string(from: toDoItem.reminderDate)
+        enableDisableSaveButton(text: nameField.text!)
+        updateReminderSwitch()
+        
+    }
+    
+    func updateReminderSwitch() {
+        LocalNotificaionManager.isAuthorized { (authorized) in
+            
+            DispatchQueue.main.async {
+                if !authorized && self.reminderSwitch.isOn{
+                    self.oneButtonAlert(title: "User Has Not Allowed Notifications", message: "To receive alerts for reminders, open Settings app, select To Do List > Notifications > Allow Notifications")
+                    self.reminderSwitch.isOn = false
+                }
+                self.view.endEditing(true)
+                self.reminderDateLabel.textColor = (self.reminderSwitch.isOn ? .black :.gray)
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+            }
+            
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         toDoItem = ToDoItem(name: nameField.text!, course: courseField.text!, dueDate: dueDatePicker.date, notes: noteView.text, dueDateSet: dueDateSwitch.isOn, reminderSet: reminderSwitch.isOn, reminderDate: reminderDatePicker.date, completed: toDoItem.completed)
-//        let dueDateLabel = dateFormatter.string(from: toDoItem.dueDate)
+        //        let dueDateLabel = dateFormatter.string(from: toDoItem.dueDate)
     }
     
+    func enableDisableSaveButton(text:String) {
+        if text.count > 0 {
+            saveBarButton.isEnabled = true
+        } else {
+            saveBarButton.isEnabled = false
+        }
+    }
     
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         
-            let isPresentingInAddMode = presentingViewController is UINavigationController
-            if isPresentingInAddMode {
-                dismiss(animated: true, completion: nil)
-            } else {
-                navigationController?.popViewController(animated: true)
+        let isPresentingInAddMode = presentingViewController is UINavigationController
+        if isPresentingInAddMode {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController?.popViewController(animated: true)
             
         }
     }
     
     @IBAction func dueDateSwitchChanged(_ sender: UISwitch) {
-        
+        self.view.endEditing(true)
         dueDateDateLabel.textColor = (dueDateSwitch.isOn ? .black :.gray)
         
         
@@ -93,26 +138,25 @@ class ToDoDetailTableViewController: UITableViewController {
     }
     
     @IBAction func reminderSwitchChanged(_ sender: Any) {
-        
-        reminderDateLabel.textColor = (reminderSwitch.isOn ? .black :.gray)
-    
-        
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        
+        updateReminderSwitch()
     }
     
     @IBAction func reminderDatePickerChanged(_ sender: UIDatePicker) {
+        self.view.endEditing(true)
         reminderDateLabel.text = dateFormatter.string(from: sender.date)
     }
     @IBAction func dueDateDatePickerChanged(_ sender: UIDatePicker) {
-//        if dueDateSwitch.isOn {
+        //        if dueDateSwitch.isOn {
+        self.view.endEditing(true)
         dueDateDateLabel.text = dateFormatter.string(from: sender.date)
         
-//        }
-    
+        //        }
+        
     }
     
+    @IBAction func textFieldEditingChanged(_ sender: UITextField) {
+        enableDisableSaveButton(text: sender.text!)
+    }
 }
 
 extension ToDoDetailTableViewController {
@@ -128,4 +172,44 @@ extension ToDoDetailTableViewController {
             return 44
         }
     }
+    
+}
+
+extension ToDoDetailTableViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        courseField.becomeFirstResponder()
+        
+        return true
+        
+    }
+    
+    //    func performActions() {
+    //
+    //
+    //            courseField.becomeFirstResponder()
+    //
+    //
+    ////        if courseField.isFirstResponder{
+    ////            courseField.resignFirstResponder()
+    ////                    noteView.becomeFirstResponder()
+    ////        }
+    //
+    //    }
+    //
+    //    private func textFieldShouldReturn(_ textField: UITextField) {
+    //        if courseField.isFirstResponder {
+    //            self.noteView.becomeFirstResponder()
+    //        }
+    ////        noteView.becomeFirstResponder()
+    //        return true
+    //    }
+    //
+    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    //        noteView.becomeFirstResponder()
+    //        return true
+    //    }
+    //
+    
+    
 }

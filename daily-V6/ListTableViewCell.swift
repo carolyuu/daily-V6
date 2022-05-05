@@ -40,15 +40,17 @@ class ListTableViewCell: UITableViewCell {
                 dueDateLabel.text = ""
             } else {
                 dueDateLabel.text = "Due: \(dateFormatter.string(from: toDoItem.dueDate))"
-//                 "\(dateFormatter.string(from: toDoItems[indexPath.row].dueDate))"
             }
             
             checkBoxButton.isSelected = toDoItem.completed
            
             if toDoItem.completed {
-                nameTextLabel.textColor = .gray
+                nameTextLabel.textColor = UIColor(named: "completedTodoItemTextColor")
+                dueDateLabel.alpha = 0.4
+                
             } else {
-                nameTextLabel.textColor = .black
+                nameTextLabel.textColor = UIColor(named: "todoItemTextColor")
+                dueDateLabel.alpha = 1
             }
         }
     }
